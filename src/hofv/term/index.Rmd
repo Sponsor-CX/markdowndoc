@@ -1,2 +1,1 @@
-`r inc_ref(level = 1, "term")`
 # **[Term]{.underline}**. The term of this Agreement (the "Term"), unless sooner terminated as provided herein, shall commence on the Effective Date and continue for a period of `r period`, expiring on `r expire`. {#term}

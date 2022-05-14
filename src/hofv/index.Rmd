@@ -2,9 +2,8 @@
 output:
     bookdown::word_document2:
         reference_docx: ../../db/hofv_ref.docx
-        output_dir: ../
         number_sections: false
-
+        # pandoc_args: ["-F ./section.hs"]
 ---
 
 ```{r setup, include=FALSE}

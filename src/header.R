@@ -1,6 +1,3 @@
-curr_level <- "0.0.0.0.0.0.0.0.0"
-global_refs <- list()
-
 insert_rmd <- function(file, hidden = FALSE) {
     if (!hidden) {
         cat(file, sep = "\n\n")
@@ -73,8 +70,7 @@ format_level <- function(text) {
 }
 
 single_ref <- function(id) {
-    ref <- str_remove(global_refs[[id]], r"{(?=\.0).+}")
-    ref <- global_refs[["fees"]]
+    ref <- paste("\\@ref(", id, ")", sep = "")
     return(paste("[", ref, "​](#", id, ")", sep = ""))
 }
 
@@ -86,15 +82,6 @@ ref_section <- c("Section", "Sections")
 ref_underline <- FALSE
 ref_bold <- FALSE
 ref_italic <- FALSE
-
-inc_ref <- function(level, id) {
-    id <- format_ref(id)
-    nums <- strsplit(curr_level, "\\.")[[1]]
-    nums[level] <- as.integer(nums[level]) + 1
-    curr_level <- paste(nums, collapse = ".")
-
-    global_refs[[id]] <- curr_level
-}
 
 ref <- function(...) {
     ids <- list(...)
