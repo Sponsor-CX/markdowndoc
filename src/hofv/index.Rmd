@@ -1,0 +1,284 @@
+---
+output:
+    bookdown::word_document2:
+        reference_docx: ../../db/hofv_ref.docx
+        output_dir: ../
+        number_sections: false
+
+---
+
+```{r setup, include=FALSE}
+library(stringr)
+library(scales)
+
+source("../header.R")
+
+### Options ###
+ref_underline <- TRUE
+
+levels <- c("%d.", "%d.%d.", "%d.%d(%w)")
+
+### Variables ###
+sponsor_entity <- "Test Company"
+period <- 5
+
+fee_amount <- dollar(1234567.89)
+installments <- 7
+payment_amount <- dollar(123)
+
+today <- get_formatted_date(Sys.Date())
+expire <- get_formatted_date(as.Date("2022-07-31"))
+due <- get_formatted_date(as.Date("2023-03-23"))
+
+### Content ###
+sig_by <- paste(nbsp(32), "By:", nbsp(4), underscores(37), "  ", sep = "")
+sig_name <- paste(
+    nbsp(32 + 9), "Name:", nbsp(2), underscores(31), "  ", sep = ""
+)
+sig_title <- paste(
+    nbsp(32 + 9), "Title:", nbsp(4), underscores(31), "  ", sep = ""
+)
+
+init <- list(index = kchild("init.Rmd"))
+term <- list(index = kchild("term/index.Rmd"))
+fees <- list(index = kchild("fees/index.Rmd"))
+sponsorship_rights <- list(index = kchild("sponsorship-rights/index.Rmd"))
+production_execution <- list(
+    index = kchild("production-execution/index.Rmd"),
+    expense_responsibility = kchild("production-execution/expense-responsibility.Rmd"),
+    design_discretion = kchild("production-execution/design-discretion.Rmd"),
+    artwork_preparation = kchild("production-execution/artwork-preparation.Rmd"),
+    refrain = kchild("production-execution/refrain.Rmd")
+)
+intellectual_property_rights <- list(
+    index = kchild("intellectual-property-rights/index.Rmd"),
+    reservation_of_rights = kchild("intellectual-property-rights/reservation-of-rights.Rmd"),
+    grant_of_rights = kchild("intellectual-property-rights/grant-of-rights.Rmd"),
+    quality_control = list(
+        index = kchild("intellectual-property-rights/quality-control/index.Rmd"),
+        preapproval = kchild("intellectual-property-rights/quality-control/preapproval.Rmd"),
+        quality = kchild("intellectual-property-rights/quality-control/quality.Rmd"),
+        permission = kchild("intellectual-property-rights/quality-control/permission.Rmd"),
+        harm = kchild("intellectual-property-rights/quality-control/harm.Rmd")
+    ),
+    grant_of_rights_by_sponsor = list(
+        index = kchild(
+            "intellectual-property-rights/grant-of-rights-by-sponsor/index.Rmd"
+        ),
+        royalty_free_license = kchild(
+            "intellectual-property-rights/grant-of-rights-by-sponsor/royalty-free-license.Rmd"
+        ),
+        harm = kchild(
+            "intellectual-property-rights/grant-of-rights-by-sponsor/harm.Rmd"
+        ),
+        limitation_on_rights = kchild(
+            "intellectual-property-rights/grant-of-rights-by-sponsor/limitation-on-rights.Rmd"
+        )
+    )
+)
+product_purchase_agreement <- list(
+    index = kchild("product-purchase-agreement/index.Rmd")
+)
+termination_available_remedies <- list(
+    index = kchild("termination-available-remedies/index.Rmd"),
+    right_to_terminate = list(
+        index = kchild(
+            "termination-available-remedies/right-to-terminate/index.Rmd"
+        ),
+        time_restrictions = kchild(
+            "termination-available-remedies/right-to-terminate/time-restrictions.Rmd"
+        ),
+        insolvency = kchild(
+            "termination-available-remedies/right-to-terminate/insolvency.Rmd"
+        ),
+        sale = kchild(
+            "termination-available-remedies/right-to-terminate/sale.Rmd"
+        ),
+        moral = kchild(
+            "termination-available-remedies/right-to-terminate/moral.Rmd"
+        )
+    ),
+    failure_to_pay_all_amounts_due = kchild(
+        "termination-available-remedies/failure-to-pay-all-amounts-due.Rmd"
+    ),
+    potential_reputational_damage = kchild(
+        "termination-available-remedies/potential-reputational-damage.Rmd"
+    ),
+    remedies_effect_of_termination = list(
+        index = kchild(
+            "termination-available-remedies/remedies-effect-of-termination/index.Rmd"
+        ),
+        sponsor_remedies = kchild(
+            "termination-available-remedies/remedies-effect-of-termination/sponsor-remedies.Rmd"
+        ),
+        hofv_remedies = kchild(
+            "termination-available-remedies/remedies-effect-of-termination/hofv-remedies.Rmd"
+        ),
+        effect_of_termination = kchild(
+            paste(
+                "termination-available-remedies/",
+                "remedies-effect-of-termination/effect-of-termination.Rmd",
+                sep = ""
+            )
+        )
+    )
+)
+
+representation_and_warranties <- list(
+    index = kchild("representation-and-warranties/index.Rmd"),
+    by_hofv_and_sponsor = list(
+        index = kchild(
+            "representation-and-warranties/by-hofv-and-sponsor/index.Rmd"
+        ),
+        rights = kchild(
+            "representation-and-warranties/by-hofv-and-sponsor/rights.Rmd"
+        ),
+        delivery = kchild(
+            "representation-and-warranties/by-hofv-and-sponsor/delivery.Rmd"
+        ),
+        standing = kchild(
+            "representation-and-warranties/by-hofv-and-sponsor/standing.Rmd"
+        )
+    ),
+    by_sponsor_only = kchild(
+        "representation-and-warranties/by-sponsor-only.Rmd"
+    )
+)
+
+indemnification <- list(
+    index = kchild("indemnification/index.Rmd"),
+    by_sponsor = kchild("indemnification/by-sponsor.Rmd"),
+    by_hofv = kchild("indemnification/by-hofv.Rmd"),
+    procedure_for_indemnification = kchild(
+        "indemnification/procedure-for-indemnification.Rmd"
+    )
+)
+
+dispute_resolution <- list(
+    index = kchild("dispute-resolution/index.Rmd"),
+    negotiation_first = kchild("dispute-resolution/negotiation-first.Rmd"),
+    negotiation_failure = kchild("dispute-resolution/negotiation-failure.Rmd"),
+    mediation_failure = kchild("dispute-resolution/mediation-failure.Rmd")
+)
+
+miscellaneous <- list(
+    index = kchild("miscellaneous/index.Rmd"),
+    assignment = kchild("miscellaneous/assignment.Rmd"),
+    agreement = kchild("miscellaneous/agreement.Rmd"),
+    modifications = kchild("miscellaneous/modifications.Rmd"),
+    governing_law = kchild("miscellaneous/governing-law.Rmd"),
+    force_majeure = list(
+        index = kchild("miscellaneous/force-majuere/index.Rmd"),
+        fire_or_other_damage = kchild(
+            "miscellaneous/force-majuere/fire-or-other-damage.Rmd"
+        ),
+        repairs = kchild(
+            "miscellaneous/force-majuere/repairs.Rmd"
+        )
+    ),
+    insurance = kchild("miscellaneous/insurance.Rmd"),
+    no_consequential = kchild("miscellaneous/no-consequential.Rmd"),
+    confidentiality = kchild("miscellaneous/confidentiality.Rmd"),
+    press_releases = kchild("miscellaneous/press-releases.Rmd"),
+    no_defamation = kchild("miscellaneous/no-defamation.Rmd"),
+    independent_contractor = kchild("miscellaneous/independent-contractor.Rmd"),
+    headings = kchild("miscellaneous/headings.Rmd"),
+    counterparts = kchild("miscellaneous/counterparts.Rmd"),
+    waiver = kchild("miscellaneous/waiver.Rmd"),
+    severability = kchild("miscellaneous/severability.Rmd")
+)
+sig <- list(
+    index = kchild("sig.Rmd")
+)
+exhibit <- list(
+    a = kchild("exhibits/a.Rmd"),
+    b = kchild("exhibits/b.Rmd"),
+    c = kchild("exhibits/c.Rmd"),
+    d = kchild("exhibits/d.Rmd"),
+    e = kchild("exhibits/e.Rmd")
+)
+```
+
+```{r, echo=FALSE, results='asis'}
+insert_rmd(init$index)
+insert_rmd(term$index)
+insert_rmd(fees$index)
+insert_rmd(sponsorship_rights$index)
+
+insert_rmd(production_execution$index)
+insert_rmd(production_execution$expense_responsibility)
+insert_rmd(production_execution$design_discretion)
+insert_rmd(production_execution$artwork_preparation)
+insert_rmd(production_execution$refrain)
+
+insert_rmd(intellectual_property_rights$index)
+insert_rmd(intellectual_property_rights$reservation_of_rights)
+insert_rmd(intellectual_property_rights$grant_of_rights)
+insert_rmd(intellectual_property_rights$quality_control$index)
+insert_rmd(intellectual_property_rights$quality_control$preapproval)
+insert_rmd(intellectual_property_rights$quality_control$quality)
+insert_rmd(intellectual_property_rights$quality_control$permission)
+insert_rmd(intellectual_property_rights$quality_control$harm)
+insert_rmd(intellectual_property_rights$grant_of_rights_by_sponsor$index)
+insert_rmd(intellectual_property_rights$grant_of_rights_by_sponsor$royalty_free_license)
+insert_rmd(intellectual_property_rights$grant_of_rights_by_sponsor$harm)
+insert_rmd(intellectual_property_rights$grant_of_rights_by_sponsor$limitation_on_rights)
+
+insert_rmd(product_purchase_agreement$index)
+
+insert_rmd(termination_available_remedies$index)
+insert_rmd(termination_available_remedies$right_to_terminate$index)
+insert_rmd(termination_available_remedies$right_to_terminate$time_restrictions)
+insert_rmd(termination_available_remedies$right_to_terminate$insolvency)
+insert_rmd(termination_available_remedies$right_to_terminate$sale)
+insert_rmd(termination_available_remedies$right_to_terminate$moral)
+```
+
+If either Party is in default under this `r ref("#termination-available-remedies:right-to-terminate")` beyond the applicable grace or cure periods, then the other Party shall be entitled to terminate this Agreement and to seek such other remedies as are described in `r ref("#termination-available-remedies:remedies-effect-of-termination")`.
+
+```{r, echo=FALSE, results='asis'}
+insert_rmd(termination_available_remedies$failure_to_pay_all_amounts_due)
+insert_rmd(termination_available_remedies$potential_reputational_damage)
+insert_rmd(termination_available_remedies$remedies_effect_of_termination$index)
+insert_rmd(termination_available_remedies$remedies_effect_of_termination$sponsor_remedies)
+insert_rmd(termination_available_remedies$remedies_effect_of_termination$hofv_remedies)
+insert_rmd(termination_available_remedies$remedies_effect_of_termination$effect_of_termination)
+insert_rmd(representation_and_warranties$index)
+insert_rmd(representation_and_warranties$by_hofv_and_sponsor$index)
+insert_rmd(representation_and_warranties$by_hofv_and_sponsor$rights)
+insert_rmd(representation_and_warranties$by_hofv_and_sponsor$delivery)
+insert_rmd(representation_and_warranties$by_hofv_and_sponsor$standing)
+insert_rmd(representation_and_warranties$by_sponsor_only)
+insert_rmd(indemnification$index)
+insert_rmd(indemnification$by_sponsor)
+insert_rmd(indemnification$by_hofv)
+insert_rmd(indemnification$procedure_for_indemnification)
+insert_rmd(dispute_resolution$index)
+insert_rmd(dispute_resolution$negotiation_first)
+insert_rmd(dispute_resolution$negotiation_failure)
+insert_rmd(dispute_resolution$mediation_failure)
+insert_rmd(miscellaneous$index)
+insert_rmd(miscellaneous$assignment)
+insert_rmd(miscellaneous$agreement)
+insert_rmd(miscellaneous$modifications)
+insert_rmd(miscellaneous$governing_law)
+insert_rmd(miscellaneous$force_majeure$index)
+insert_rmd(miscellaneous$force_majeure$fire_or_other_damage)
+insert_rmd(miscellaneous$force_majeure$repairs)
+insert_rmd(miscellaneous$insurance)
+insert_rmd(miscellaneous$no_consequential)
+insert_rmd(miscellaneous$confidentiality)
+insert_rmd(miscellaneous$press_releases)
+insert_rmd(miscellaneous$no_defamation)
+insert_rmd(miscellaneous$independent_contractor)
+insert_rmd(miscellaneous$headings)
+insert_rmd(miscellaneous$counterparts)
+insert_rmd(miscellaneous$waiver)
+insert_rmd(miscellaneous$severability)
+insert_rmd(sig$index)
+insert_rmd(exhibit$a)
+insert_rmd(exhibit$b)
+insert_rmd(exhibit$c)
+insert_rmd(exhibit$d)
+insert_rmd(exhibit$e)
+```

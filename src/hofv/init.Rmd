@@ -1,0 +1,12 @@
+######### **[SPONSORSHIP AGREEMENT]{.underline}** {-}
+
+This SPONSORSHIP AGREEMENT (the "[Agreement]{.underline}") is made and entered into as of `r today` (the "[Effective Date]{.underline}"), by and among HOF Village Newco, LLC ("[HOFV]{.underline}"), and `r sponsor_entity` ("[Sponsor]{.underline}"). HOFV and Sponsor may be referred to collectively herein as the "Parties" and each individually as a "Party".
+
+######### **WITNESSETH:** {-}
+
+`r nbsp(4 * 3)`**WHEREAS,** Sponsor desires to become a sponsor of the Hall of Fame Village powered by Johnson Controls in Canton, Ohio (the "Village") and to obtain the rights set forth herein in connection with such sponsorship;  
+&nbsp;  
+`r nbsp(4 * 3)`**WHEREAS,** HOFV has the authority to enter into this Agreement with Sponsor and is willing to do so for the consideration stated herein.  
+&nbsp;  
+`r nbsp(4 * 3)`**NOW, THEREFORE,** in consideration of the promises herein contained, the parties hereto agree as follows:  
+&nbsp;  

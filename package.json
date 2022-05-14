@@ -1,0 +1,27 @@
+{
+  "name": "markdowndoc",
+  "version": "0.0.0",
+  "description": "Special format that converts markdown into document formats.",
+  "main": "dist/app.js",
+  "scripts": {
+    "start": "tsc && node dist/app.js",
+    "lint": "eslint . --ext .ts",
+    "test": "jest"
+  },
+  "repository": "git@github.com:Sponsor-CX/markdowndoc.git",
+  "author": "SponsorCX <admin@sponsorcx.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.23.0",
+    "@typescript-eslint/parser": "^5.23.0",
+    "eslint": "^8.15.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.6.2",
+    "typescript": "^4.6.4"
+  },
+  "dependencies": {
+    "docx": "^7.3.0"
+  }
+}

@@ -1,0 +1,32 @@
+######### *[Signature Page Follows]* {-}
+
+\newpage
+
+`r nbsp(4 * 3)`**IN WITNESS WHEREOF,** the undersigned have caused this Agreement to
+be duly executed as of this `r underscores(2)` day of `r underscores(8)`, 2022.
+
+`r nbsp(32)`**[HOFV]{.underline}:**  
+
+`r nbsp(32)`**HOF VILLAGE NEWCO, LLC**  
+
+`r sig_by`
+
+`r sig_name`
+
+`r sig_title`
+
+`r nbsp(32)`**[SPONSOR]{.underline}:**  
+
+`r nbsp(32)`**`r sponsor_entity`**  
+
+`r sig_by`
+
+`r sig_name`
+
+`r sig_title`
+
+`r br(20)`
+
+######### *[Signature Page to Sponsorship Agreement]* {-}
+
+\newpage

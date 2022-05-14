@@ -1,0 +1,15 @@
+######### **[EXHIBIT A]{.underline}** {.unnumbered #exhibit-a}
+
+######### **FEES** {-}
+
+Subject to the terms of this Agreement and Exhibit A herein, Sponsor shall pay the following fees to HOFV:
+
+# **Annual Sponsorship Fee.** Sponsor shall pay an annual sponsorship fee during the pendency of the Agreement as follows:
+
+### Year 1: `r fee_amount`
+
+The payment for Year 1 shall be payable in `r installments` equal installments of `r payment_amount` each, with the first such payment due on the Effective Date. The payment schedule is agreed as follows:  
+&nbsp;  
+\- Payment 1 of `r installments` in the amount of `r payment_amount` due on or before `r due`;
+
+\newpage

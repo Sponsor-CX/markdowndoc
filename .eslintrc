@@ -1,0 +1,39 @@
+{
+    "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "prettier",
+        "prettier/@typescript-eslint",
+        "plugin:prettier/recommended"
+    ],
+    "plugins": ["@typescript-eslint"],
+    "env": {
+        "browser": true,
+        "jest": true
+    },
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "sourceType": "module",
+        "project": "./tsconfig.json"
+    },
+    "rules": {
+        "linebreak-style": "off",
+        "import/prefer-default-export": "off",
+        "@typescript-eslint/no-shadow": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/naming-convention":"off",
+        "@typescript-eslint/ban-ts-comment": "off",
+        "global-require": "off",
+        "prefer-const": "off",
+        "prefer-destructuring": "off",
+        "prettier/prettier": [
+            1,
+            {
+                "endOfLine": "auto"
+            }
+        ]
+    }
+}

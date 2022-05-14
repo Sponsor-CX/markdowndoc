@@ -1,0 +1,11 @@
+######### **[EXHIBIT C]{.underline}** {.unnumbered #exhibit-c}
+
+######### **HOFV'S MARKS** {-}
+
+`r br(6)`
+
+![Logo Description automatically generated](../assets/hofvbannera.jpg){width="2.9895833333333335in" height="0.9270833333333334in"} ![A picture containing logo Description automatically generated](../assets/hofvbannerb.jpg){width="2.5625in" height="0.8020833333333334in"}
+
+![Logo, company name Description automatically generated](../assets/hofvpostera.jpg){width="1.8333333333333333in" height="2.1666666666666665in"} ![Logo, company name Description automatically generated](../assets/hofvposterb.jpg){width="2.0416666666666665in" height="2.6354166666666665in"}
+
+\newpage
